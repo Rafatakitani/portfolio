@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rafael Takitani — Dev</title>
+<meta name="description" content="Rafael Takitani — dev. Ruby, Rails e JavaScript. Apps web, joguinhos e ferramentas." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#14161A;
+    --bg-2:#191C22;
+    --line:#2A2E37;
+    --ink:#E8E4DC;
+    --ink-dim:#969CA6;
+    --amber:#E8A33D;
+    --teal:#5FB3A3;
+    --display:"Bricolage Grotesque",sans-serif;
+    --body:"Inter",sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:var(--body);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--amber);color:#14161A}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  /* ---- header ---- */
+  header{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(20,22,26,.72);
+    border-bottom:1px solid var(--line);
+  }
+  .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .mono{font-family:var(--mono)}
+  .logo{font-family:var(--mono);font-weight:700;letter-spacing:.06em;font-size:14px}
+  .logo b{color:var(--amber)}
+  .nav{display:flex;gap:26px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim);letter-spacing:.03em}
+  .nav a{transition:color .18s}
+  .nav a:hover{color:var(--ink)}
+  .nav a::before{content:"→ ";color:var(--teal);opacity:0}
+  .nav a:hover::before{opacity:1}
+
+  /* ---- hero ---- */
+  .hero{padding:96px 0 72px;position:relative}
+  .eyebrow{
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--teal);margin-bottom:26px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 var(--teal);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(95,179,163,.5)}70%{box-shadow:0 0 0 9px rgba(95,179,163,0)}100%{box-shadow:0 0 0 0 rgba(95,179,163,0)}}
+  h1{
+    font-family:var(--display);font-weight:800;
+    font-size:clamp(44px,8.5vw,104px);line-height:.98;
+    letter-spacing:-.02em;margin-bottom:28px;
+  }
+  h1 .thin{font-weight:400;color:var(--ink-dim)}
+  h1 em{font-style:normal;color:var(--amber)}
+  .lead{font-size:clamp(17px,2.4vw,21px);max-width:52ch;color:#C6C3BC}
+  .lead b{color:var(--ink);font-weight:600}
+
+  /* ---- timer ---- */
+  .timer{
+    margin-top:44px;display:inline-flex;align-items:stretch;
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;
+    background:var(--bg-2);
+  }
+  .timer .face{
+    padding:18px 26px;display:flex;flex-direction:column;gap:4px;
+    border-right:1px solid var(--line);
+  }
+  .timer .clock{font-family:var(--mono);font-weight:700;font-size:30px;letter-spacing:.04em;color:var(--amber);font-variant-numeric:tabular-nums}
+  .timer .clock .ms{color:var(--ink-dim);font-size:20px}
+  .timer .meta{padding:18px 26px;display:flex;flex-direction:column;justify-content:center;gap:5px}
+  .timer .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+  .timer .v{font-size:14.5px;color:var(--ink)}
+  .timer .v b{color:var(--teal)}
+
+  /* ---- section frame ---- */
+  section{padding:78px 0;border-top:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:38px;flex-wrap:wrap}
+  .sec-title{font-family:var(--display);font-weight:600;font-size:clamp(26px,4vw,38px);letter-spacing:-.01em}
+  .sec-note{font-family:var(--mono);font-size:12.5px;color:var(--ink-dim);letter-spacing:.03em}
+
+  /* ---- ledger ---- */
+  .ledger{border-top:1px solid var(--line)}
+  .row{
+    display:grid;grid-template-columns:1.3fr 2.1fr auto auto;
+    gap:28px;align-items:center;
+    padding:22px 6px;border-bottom:1px solid var(--line);
+    transition:background .18s,padding .18s;position:relative;
+  }
+  .row:hover{background:var(--bg-2);padding-left:18px}
+  .row .name{font-family:var(--display);font-weight:600;font-size:20px;display:flex;align-items:center;gap:12px}
+  .row .name .arrow{color:var(--amber);opacity:0;transform:translateX(-6px);transition:.18s}
+  .row:hover .name .arrow{opacity:1;transform:translateX(0)}
+  .row .desc{color:#B4B1AB;font-size:14.5px}
+  .row .tag{font-family:var(--mono);font-size:12px;color:var(--teal);border:1px solid var(--line);padding:4px 10px;border-radius:999px;justify-self:start;white-space:nowrap}
+  .row .yr{font-family:var(--mono);font-size:13px;color:var(--ink-dim);font-variant-numeric:tabular-nums;justify-self:end}
+  @media(max-width:720px){
+    .row{grid-template-columns:1fr auto;gap:6px 16px}
+    .row .desc{grid-column:1/-1;order:3}
+    .row .tag{order:4;grid-column:1/-1;justify-self:start}
+    .row .yr{order:2}
+  }
+
+  /* ---- focus / ponto ---- */
+  .focus-intro{max-width:60ch;color:#B4B1AB;margin-bottom:36px;font-size:15.5px}
+  .focus-intro a{color:var(--amber);border-bottom:1px solid rgba(232,163,61,.4)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:800px){.cards{grid-template-columns:1fr}}
+  .card{
+    border:1px solid var(--line);border-radius:14px;padding:26px;
+    background:var(--bg-2);display:flex;flex-direction:column;gap:12px;
+    transition:border-color .2s,transform .2s;min-height:200px;
+  }
+  .card:hover{border-color:var(--amber);transform:translateY(-3px)}
+  .card .idx{font-family:var(--mono);font-size:12px;color:var(--ink-dim);letter-spacing:.1em}
+  .card h3{font-family:var(--display);font-weight:600;font-size:22px}
+  .card h3 span{color:var(--amber)}
+  .card p{font-size:14px;color:#B4B1AB;flex:1}
+  .card .lang{font-family:var(--mono);font-size:11.5px;color:var(--teal);letter-spacing:.05em}
+
+  /* ---- more grid ---- */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .mini{
+    border:1px solid var(--line);border-radius:11px;padding:18px 20px;
+    display:flex;flex-direction:column;gap:6px;transition:.18s;
+  }
+  .mini:hover{border-color:var(--teal);background:var(--bg-2)}
+  .mini .t{font-family:var(--mono);font-size:14.5px;font-weight:500;color:var(--ink)}
+  .mini .d{font-size:13px;color:var(--ink-dim)}
+
+  /* ---- footer ---- */
+  footer{border-top:1px solid var(--line);padding:70px 0 60px}
+  .foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-end}
+  .foot-title{font-family:var(--display);font-weight:800;font-size:clamp(30px,6vw,58px);letter-spacing:-.02em;line-height:1}
+  .foot-title em{font-style:normal;color:var(--amber)}
+  .links{display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:14px}
+  .links a{color:var(--ink-dim);transition:color .18s;display:inline-flex;gap:9px;align-items:center}
+  .links a:hover{color:var(--amber)}
+  .links a .b{color:var(--teal)}
+  .colophon{margin-top:44px;font-family:var(--mono);font-size:11.5px;color:#5C626C;letter-spacing:.02em;line-height:1.8}
+
+  /* ---- feature block ---- */
+  .feature{
+    display:grid;grid-template-columns:1fr 260px;gap:0;
+    border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    background:var(--bg-2);transition:border-color .2s;
+  }
+  .feature:hover{border-color:var(--amber)}
+  .feature-body{padding:38px 40px}
+  .feature-body .idx{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+  .feature-body h3{font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,44px);letter-spacing:-.01em;margin-bottom:16px}
+  .feature-body h3 a{color:var(--ink);transition:color .18s}
+  .feature:hover .feature-body h3 a{color:var(--amber)}
+  .feature-body p{font-size:15.5px;color:#C6C3BC;max-width:62ch}
+  .feature-body p a{color:var(--amber);border-bottom:1px solid rgba(232,163,61,.4)}
+  .kbd{font-family:var(--mono);font-size:12.5px;background:#0F1115;border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--ink);white-space:nowrap}
+  .feature-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+  .feature-tags span{font-family:var(--mono);font-size:11.5px;color:var(--ink-dim);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+  .feature-side{
+    border-left:1px solid var(--line);padding:34px 30px;
+    display:flex;flex-direction:column;gap:14px;justify-content:center;
+    background:linear-gradient(180deg,rgba(232,163,61,.05),transparent);
+  }
+  .feature-side .chip{font-family:var(--mono);font-size:13px;color:var(--ink)}
+  .feature-cta{margin-top:12px;font-family:var(--mono);font-size:13px;color:var(--amber);letter-spacing:.03em}
+  @media(max-width:760px){
+    .feature{grid-template-columns:1fr}
+    .feature-side{border-left:none;border-top:1px solid var(--line);flex-direction:row;flex-wrap:wrap}
+    .feature-body{padding:28px 24px}
+  }
+
+  /* ---- private rows ---- */
+  .row.priv{cursor:default}
+  .row.priv:hover{background:transparent;padding-left:6px}
+  .row.priv .name{color:#C6C3BC}
+  .row .lock{font-size:14px;filter:grayscale(.2);opacity:.85}
+  .row.priv .tag{color:var(--ink-dim)}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <div class="logo"><b>◷</b> rafael takitani</div>
+    <nav class="nav">
+      <a href="#featured">destaque</a>
+      <a href="#work">work</a>
+      <a href="#contact">contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="border-top:none">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span> Dev · Ruby · JavaScript · Brasil</div>
+      <h1>Construo <em>apps</em>, jogos<br /><span class="thin">&amp; ferramentas</span> que uso.</h1>
+      <p class="lead">Sou <b>Rafael Takitani</b>. Vivo em Ruby, Rails e JavaScript — e caio na Godot quando bate a vontade de fazer joguinho. Boa parte dos projetos aqui nasceu pra resolver um problema meu.</p>
+
+      <div class="timer" role="img" aria-label="Cronômetro contando o tempo desde que a página abriu">
+        <div class="face">
+          <div class="clock" id="clock">00:00:<span id="sec">00</span><span class="ms">.0</span></div>
+          <div class="k" style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim);margin-top:2px">tempo que você tá aqui</div>
+        </div>
+        <div class="meta">
+          <div class="k">status</div>
+          <div class="v">quase sempre <b>construindo algo</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="featured">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="sec-title">Em destaque</h2>
+        <div class="sec-note">// o que tá no ar agora</div>
+      </div>
+      <div class="feature">
+        <div class="feature-body">
+          <div class="idx">extensão de navegador · pública</div>
+          <h3><a href="https://github.com/Rafatakitani/ponto-extension" target="_blank" rel="noopener">ponto-extension</a></h3>
+          <p>A extensão de Chrome que fiz pro <a href="https://pontotracker.com" target="_blank" rel="noopener">Ponto</a>, o time-tracker self-hosted. Traz o timer pra dentro do navegador: popup pra iniciar/parar de qualquer aba com projeto, task, tags e faturável; badge no ícone; atalho global <span class="kbd">Ctrl+Shift+Space</span>; e um lembrete quando o timer fica esquecido rodando. Manifest V3, zero-build — sem Node, sem bundler.</p>
+          <div class="feature-tags">
+            <span>JavaScript</span><span>Manifest V3</span><span>zero-build</span><span>Chrome</span>
+          </div>
+        </div>
+        <div class="feature-side">
+          <div class="chip">◷ timer</div>
+          <div class="chip">⌘ atalho global</div>
+          <div class="chip">◉ badge</div>
+          <a class="feature-cta" href="https://github.com/Rafatakitani/ponto-extension" target="_blank" rel="noopener">ver no GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="sec-title">Projetos</h2>
+        <div class="sec-note">// só coisa minha · 🔒 = repo privado</div>
+      </div>
+      <div class="ledger" id="ledger"></div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-title">Vamos<br />construir <em>algo.</em></div>
+      <div class="links">
+        <a href="https://github.com/Rafatakitani" target="_blank" rel="noopener"><span class="b">gh/</span>Rafatakitani</a>
+        <a href="mailto:rafaeltakitani@gmail.com"><span class="b">@</span>rafaeltakitani@gmail.com</a>
+      </div>
+    </div>
+    <div class="colophon">
+      Feito à mão com HTML, CSS e um pouco de JavaScript. Sem framework, sem build.<br />
+      © <span id="yr"></span> Rafael Takitani · ◷ quase sempre construindo algo.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---- hero timer (freezes under reduced-motion) ----
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var t0 = Date.now();
+    var clock = document.getElementById("clock");
+    var pad = function(n){return String(n).padStart(2,"0");};
+    function tick(){
+      var e = (Date.now()-t0)/1000;
+      var h = Math.floor(e/3600), m = Math.floor(e%3600/60), s = Math.floor(e%60), d = Math.floor((e*10)%10);
+      clock.innerHTML = pad(h)+":"+pad(m)+":"+pad(s)+'<span class="ms">.'+d+'</span>';
+      if(!reduce) requestAnimationFrame(tick);
+    }
+    tick();
+  })();
+
+  // ---- projetos (só repos do Rafatakitani). priv:true = repo privado, sem link ----
+  var work = [
+    {n:"beautyreport",       d:"MVP de análise de selfie com pontuação pelo cânone clássico de beleza.", t:"Ruby",     y:"2026", priv:true},
+    {n:"muscleclicker",      d:"Jogo clicker de academia.",                                             t:"JavaScript", y:"2024", priv:true},
+    {n:"caribeburg",         d:"Jogo feito na Godot.",                                                  t:"GDScript",  y:"2026", priv:true},
+    {n:"scheduled_tweets",   d:"Agendador de tweets em Rails.",                                         t:"Ruby · Rails", y:"2024", u:"https://github.com/Rafatakitani/scheduled_tweets"},
+    {n:"estudobot",          d:"Bot de estudos.",                                                       t:"Ruby",     y:"2026", priv:true},
+    {n:"takiguides",         d:"Guias.",                                                                t:"Ruby",     y:"2026", priv:true},
+    {n:"mealium",            d:"App de planejamento de refeições.",                                     t:"HTML/JS",  y:"2026", priv:true},
+    {n:"sheet_wise",         d:"Ferramenta de planilhas.",                                              t:"HTML/JS",  y:"2026", priv:true},
+    {n:"colecionaclube",     d:"Clube de colecionáveis.",                                               t:"HTML/JS",  y:"2026", priv:true},
+    {n:"advent-of-code-2024",d:"Minhas soluções do Advent of Code 2024.",                               t:"Ruby",     y:"2024", priv:true},
+    {n:"encontre_a_senha",   d:"Joguinho web de adivinhar a senha.",                                    t:"HTML/JS",  y:"2021", u:"https://github.com/Rafatakitani/encontre_a_senha"}
+  ];
+
+  var ledger = document.getElementById("ledger");
+  work.forEach(function(w){
+    var el = document.createElement(w.priv ? "div" : "a");
+    el.className = "row" + (w.priv ? " priv" : "");
+    if(!w.priv){ el.href = w.u; el.target = "_blank"; el.rel = "noopener"; }
+    var lead = w.priv ? '<span class="lock" title="repositório privado">🔒</span>'
+                      : '<span class="arrow">↗</span>';
+    el.innerHTML =
+      '<div class="name">'+lead+w.n+'</div>'+
+      '<div class="desc">'+w.d+'</div>'+
+      '<div class="tag">'+w.t+'</div>'+
+      '<div class="yr">'+w.y+'</div>';
+    ledger.appendChild(el);
+  });
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
