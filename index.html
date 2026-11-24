@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Rafael Takitani — Dev</title>
-<meta name="description" content="Rafael Takitani — dev. Ruby, Rails e JavaScript. Apps web, joguinhos e ferramentas." />
+<meta name="description" content="Rafael Takitani — dev. Ruby, Rails, Rust e JavaScript. Apps web, joguinhos, ferramentas e sites pra negócios." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -97,7 +97,7 @@
   /* ---- ledger ---- */
   .ledger{border-top:1px solid var(--line)}
   .row{
-    display:grid;grid-template-columns:1.3fr 2.1fr auto auto;
+    display:grid;grid-template-columns:1.3fr 2.1fr 120px 44px;
     gap:28px;align-items:center;
     padding:22px 6px;border-bottom:1px solid var(--line);
     transition:background .18s,padding .18s;position:relative;
@@ -192,6 +192,103 @@
   .row .lock{font-size:14px;filter:grayscale(.2);opacity:.85}
   .row.priv .tag{color:var(--ink-dim)}
 
+  /* ---- hero: entrada em sequência (único momento automático da página) ---- */
+  .rise{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.06em}
+  .rise > span{display:inline-block;animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+  @keyframes rise{from{transform:translateY(105%)}to{transform:none}}
+  .hero .lead,.hero .timer,.hero .eyebrow{animation:fadein .8s ease both}
+  .hero .eyebrow{animation-delay:.05s}
+  .hero .lead{animation-delay:.75s}
+  .hero .timer{animation-delay:.95s}
+  @keyframes fadein{from{opacity:0}to{opacity:1}}
+
+  /* ---- rege: terminal ---- */
+  .rege{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:40px;align-items:start}
+  @media(max-width:900px){.rege{grid-template-columns:minmax(0,1fr)}}
+  @media(max-width:640px){
+    .nav a:not([href="#contact"]){display:none}
+    .logo{white-space:nowrap}
+    .timer{display:flex;flex-wrap:wrap;max-width:100%}
+    .timer .face{border-right:none;border-bottom:1px solid var(--line);flex:1 1 100%}
+    .term{font-size:11px}
+    .wrap{padding:0 16px}
+  }
+  .rege h3{font-family:var(--display);font-weight:800;font-size:clamp(40px,7vw,72px);line-height:.95;letter-spacing:-.02em;margin-bottom:18px}
+  .rege p{color:#C6C3BC;font-size:15.5px;max-width:52ch;margin-bottom:14px}
+  .rege p a{color:var(--amber);border-bottom:1px solid rgba(232,163,61,.4)}
+  .rege ul{list-style:none;margin:22px 0 0;display:grid;gap:10px;font-size:14.5px;color:#B4B1AB}
+  .rege li{padding-left:22px;position:relative}
+  .rege li::before{content:"";position:absolute;left:2px;top:.65em;width:8px;height:8px;border-radius:2px;background:var(--teal)}
+  .term{
+    background:#0E1014;border:1px solid var(--line);border-radius:12px;overflow:hidden;
+    font-family:var(--mono);font-size:12.5px;line-height:1.75;
+    box-shadow:0 30px 80px -40px rgba(232,163,61,.25);
+  }
+  .term-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--bg-2)}
+  .term-bar i{width:10px;height:10px;border-radius:50%;background:#2E323B}
+  .term-bar span{margin-left:8px;color:var(--ink-dim);font-size:11.5px}
+  .term-body{padding:16px 18px;min-height:300px;white-space:pre;overflow-x:auto}
+  .term-body .l{display:block;opacity:0;transform:translateX(-4px);transition:opacity .25s,transform .25s}
+  .term-body .l.on{opacity:1;transform:none}
+  .c-dim{color:#5C626C}.c-amb{color:var(--amber)}.c-teal{color:var(--teal)}.c-ink{color:var(--ink)}.c-ok{color:#8BC47A}
+  .caret{display:inline-block;width:7px;height:1.1em;background:var(--amber);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .term-replay{margin-top:12px;font-family:var(--mono);font-size:12.5px;color:var(--ink-dim);background:none;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;transition:color .18s,border-color .18s}
+  .term-replay:hover{color:var(--amber);border-color:var(--amber)}
+
+  /* ---- clientes: sites ao vivo ---- */
+  .sites{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+  @media(max-width:900px){.sites{grid-template-columns:1fr}}
+  .site{display:flex;flex-direction:column;gap:14px}
+  .shot{
+    --s:.25;position:relative;aspect-ratio:16/11;overflow:hidden;
+    border:1px solid var(--line);border-radius:10px;background:#0E1014;
+  }
+  .shot iframe{
+    position:absolute;top:0;left:0;width:1280px;height:2600px;border:0;
+    transform-origin:0 0;transform:scale(var(--s));pointer-events:none;
+    transition:transform 4s cubic-bezier(.45,0,.2,1);
+  }
+  .site:hover .shot iframe,.site:focus-visible .shot iframe{transform:scale(var(--s)) translateY(-1720px)}
+  .shot::after{content:"";position:absolute;inset:0;box-shadow:inset 0 -40px 40px -30px rgba(14,16,20,.9)}
+  .site h3{font-family:var(--display);font-weight:600;font-size:21px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .site h3 small{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--teal)}
+  .site p{font-size:14px;color:#B4B1AB}
+  .site:hover h3{color:var(--amber)}
+  .site:focus-visible{outline:2px solid var(--amber);outline-offset:6px;border-radius:10px}
+
+  /* ---- filtro do ledger ---- */
+  .filters{display:flex;flex-wrap:wrap;gap:8px}
+  .filters button{
+    font-family:var(--mono);font-size:12.5px;color:var(--ink-dim);background:none;
+    border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;
+    transition:color .18s,border-color .18s,background .18s;
+  }
+  .filters button:hover{color:var(--ink)}
+  .filters button[aria-pressed="true"]{color:#14161A;background:var(--teal);border-color:var(--teal)}
+  .row.hide{display:none}
+  .row.enter{animation:rowin .35s ease both}
+  @keyframes rowin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* ---- linha do tempo ---- */
+  .tl{position:relative;padding-left:34px;display:grid;gap:40px}
+  .tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .tl .fill{position:absolute;left:6px;top:6px;width:2px;height:calc(100% - 12px);background:linear-gradient(var(--amber),var(--teal));transform-origin:top;transform:scaleY(var(--p,0))}
+  .tl-item{position:relative}
+  .tl-item::before{content:"";position:absolute;left:-34px;top:8px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--line);transition:border-color .3s,background .3s}
+  .tl-item.lit::before{border-color:var(--amber);background:var(--amber)}
+  .tl-item .when{font-family:var(--mono);font-size:13px;color:var(--amber);font-variant-numeric:tabular-nums}
+  .tl-item h4{font-family:var(--display);font-weight:600;font-size:22px;margin:2px 0 6px}
+  .tl-item p{color:#B4B1AB;font-size:15px;max-width:60ch}
+
+  /* ---- ferramentas ---- */
+  .tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .tool{background:var(--bg);padding:22px 22px 24px}
+  .tool h4{font-family:var(--display);font-weight:600;font-size:18px;margin-bottom:6px}
+  .tool p{font-size:14px;color:#B4B1AB}
+
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important;scroll-behavior:auto}
   }
@@ -202,6 +299,8 @@
   <div class="wrap bar">
     <div class="logo"><b>◷</b> rafael takitani</div>
     <nav class="nav">
+      <a href="#rege">rege</a>
+      <a href="#clientes">clientes</a>
       <a href="#work">projetos</a>
       <a href="#contact">contato</a>
     </nav>
@@ -212,7 +311,15 @@
   <section class="hero" style="border-top:none">
     <div class="wrap">
       <div class="eyebrow"><span class="dot"></span> Dev · Ruby · Rust · JavaScript · Brasil</div>
-      <h1>Construo <em>apps</em>, jogos<br /><span class="thin">&amp; ferramentas</span> que uso.</h1>
+      <h1>
+        <span class="rise"><span style="animation-delay:.10s">Construo</span></span>
+        <span class="rise"><span style="animation-delay:.18s"><em>apps</em>,</span></span>
+        <span class="rise"><span style="animation-delay:.26s">jogos</span></span><br />
+        <span class="thin"><span class="rise"><span style="animation-delay:.38s">&amp;</span></span>
+        <span class="rise"><span style="animation-delay:.46s">ferramentas</span></span>
+        <span class="rise"><span style="animation-delay:.54s">que</span></span>
+        <span class="rise"><span style="animation-delay:.62s">uso.</span></span></span>
+      </h1>
       <p class="lead">Sou <b>Rafael Takitani</b>. Vivo em Ruby, Rails e JavaScript, ando aprontando em Rust — e caio na Godot quando bate a vontade de fazer joguinho. Boa parte dos projetos aqui nasceu pra resolver um problema meu.</p>
 
       <div class="timer" role="img" aria-label="Cronômetro contando o tempo desde que a página abriu">
@@ -228,13 +335,118 @@
     </div>
   </section>
 
-  <section id="work" style="border-top:none;padding-top:0">
+  <section id="rege">
+    <div class="wrap rege">
+      <div>
+        <h3><a href="https://github.com/Rafatakitani/rege" target="_blank" rel="noopener">rege</a></h3>
+        <p>Um orquestrador de IAs no terminal. Um modelo mestre recebe a tarefa, decide se ela é fácil ou difícil e manda outras IAs de linha de comando — Claude Code, Codex, Gemini — trabalharem em paralelo, cada uma isolada no seu próprio <span class="kbd">git worktree</span> dentro do <span class="kbd">tmux</span>.</p>
+        <p>Depois ele revisa o que cada uma fez, junta o melhor, roda os testes e abre um pull request. Merge, nunca: quem aprova é gente.</p>
+        <ul>
+          <li>Tarefa fácil: divide em partes, cada worker pega uma.</li>
+          <li>Tarefa difícil: vários fazem a mesma coisa e o mestre julga.</li>
+          <li>Começou em Ruby e virou Rust. Código aberto, licença MIT.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="term" aria-label="Demonstração animada de uma sessão do rege">
+          <div class="term-bar"><i></i><i></i><i></i><span>~/meu-app — rege</span></div>
+          <div class="term-body" id="term"></div>
+        </div>
+        <button class="term-replay" id="replay" type="button">↺ rodar de novo</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="clientes">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="sec-title">Projetos</h2>
-        <div class="sec-note">// só coisa minha · 🔒 = repo privado</div>
+        <h2 class="sec-title">Sites pra negócios de verdade</h2>
+        <div class="sec-note">// passe o mouse pra rolar a página</div>
+      </div>
+      <div class="sites">
+        <a class="site" href="https://rafatakitani.github.io/barbearia-pires-preview/" target="_blank" rel="noopener">
+          <div class="shot"><iframe scrolling="no" title="Prévia do site da Barbearia Pires" loading="lazy" tabindex="-1" src="https://rafatakitani.github.io/barbearia-pires-preview/"></iframe></div>
+          <h3>Barbearia Pires <small>2026</small></h3>
+          <p>Site da barbearia na Vila Monumento, em São Paulo.</p>
+        </a>
+        <a class="site" href="https://rafatakitani.github.io/sogm-preview/" target="_blank" rel="noopener">
+          <div class="shot"><iframe scrolling="no" title="Prévia do site da oficina SÓGM" loading="lazy" tabindex="-1" src="https://rafatakitani.github.io/sogm-preview/"></iframe></div>
+          <h3>Grandes Mecânicos SÓGM <small>2026</small></h3>
+          <p>Site da oficina mecânica.</p>
+        </a>
+        <a class="site" href="https://rafatakitani.github.io/amg-preview/" target="_blank" rel="noopener">
+          <div class="shot"><iframe scrolling="no" title="Prévia da landing page da AMG Serralheria" loading="lazy" tabindex="-1" src="https://rafatakitani.github.io/amg-preview/"></iframe></div>
+          <h3>AMG Serralheria <small>2026</small></h3>
+          <p>Landing page da serralheria, feita em Rails.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="sec-title">Outros projetos</h2>
+        <div class="filters" role="group" aria-label="Filtrar por tecnologia">
+          <button type="button" data-f="" aria-pressed="true">tudo</button>
+          <button type="button" data-f="Rails" aria-pressed="false">rails</button>
+          <button type="button" data-f="Godot" aria-pressed="false">godot</button>
+          <button type="button" data-f="Ruby" aria-pressed="false">ruby</button>
+        </div>
       </div>
       <div class="ledger" id="ledger"></div>
+      <div class="sec-note" style="margin-top:16px">// só coisa minha · 🔒 = repo privado</div>
+    </div>
+  </section>
+
+  <section id="caminho">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="sec-title">Como cheguei aqui</h2>
+      </div>
+      <div class="tl" id="tl">
+        <div class="fill" aria-hidden="true"></div>
+        <div class="tl-item">
+          <div class="when">2021</div>
+          <h4>O primeiro joguinho</h4>
+          <p>Encontre a senha: um cofre, uma senha pra adivinhar, Godot. Foi onde peguei gosto por fazer coisa que roda na tela de alguém.</p>
+        </div>
+        <div class="tl-item">
+          <div class="when">2024</div>
+          <h4>Ruby e Rails a sério</h4>
+          <p>Agendador de tweets em Rails, Advent of Code em Ruby e um clicker de academia na Godot pra não perder o costume.</p>
+        </div>
+        <div class="tl-item">
+          <div class="when">início de 2026</div>
+          <h4>Apps pra problemas de casa</h4>
+          <p>Planejador de refeições da família, inventário dos objetos de casa, app de estudo que gera resumo e flashcard com IA. Tudo Rails, tudo usado de verdade.</p>
+        </div>
+        <div class="tl-item">
+          <div class="when">meio de 2026</div>
+          <h4>Do Ruby pro Rust</h4>
+          <p>O rege nasceu em Ruby e foi reescrito em Rust. Hoje é a ferramenta com que eu mesmo programo: várias IAs trabalhando ao mesmo tempo, eu revisando os PRs.</p>
+        </div>
+        <div class="tl-item">
+          <div class="when">fim de 2026</div>
+          <h4>Primeiros clientes</h4>
+          <p>Sites pra uma barbearia, uma oficina e uma serralheria. Negócio pequeno, página rápida, sem enrolação.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ferramentas">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="sec-title">Com o que eu trabalho</h2>
+      </div>
+      <div class="tools">
+        <div class="tool"><h4>Ruby &amp; Rails</h4><p>Onde moro. Quase todo app web daqui começa com <span class="kbd">rails new</span>.</p></div>
+        <div class="tool"><h4>JavaScript</h4><p>Sem framework quando dá. Este site é um HTML só, sem build.</p></div>
+        <div class="tool"><h4>Rust</h4><p>Pra ferramenta de terminal que precisa ser rápida e não quebrar. O rege é Rust.</p></div>
+        <div class="tool"><h4>Godot</h4><p>Pros joguinhos: roguelite naval, clicker, quebra-cabeça.</p></div>
+        <div class="tool"><h4>IAs no terminal</h4><p>Claude Code, Codex e Gemini, orquestrados pelo rege, cada um no seu worktree.</p></div>
+      </div>
     </div>
   </section>
 </main>
@@ -256,9 +468,10 @@
 </footer>
 
 <script>
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   // ---- hero timer (freezes under reduced-motion) ----
   (function(){
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var t0 = Date.now();
     var clock = document.getElementById("clock");
     var pad = function(n){return String(n).padStart(2,"0");};
@@ -271,12 +484,71 @@
     tick();
   })();
 
+  // ---- rege: sessão encenada no terminal ----
+  (function(){
+    var body = document.getElementById("term");
+    var bar = function(n){ return "█".repeat(n)+"░".repeat(12-n); };
+    var M = '<span class="c-amb">◆ mestre</span>  ';
+    var script = [
+      ['<span class="c-dim">$</span> <span class="c-ink">rege exec "exportar o relatório em CSV"</span>', 700],
+      [M+'triagem: <span class="c-ink">difícil</span> <span class="c-dim">→ redundância + juiz</span>', 900],
+      [M+'spawn_agent <span class="c-teal">claude</span>  <span class="c-dim">→ worktree csv-a</span>', 350],
+      [M+'spawn_agent <span class="c-teal">codex</span>   <span class="c-dim">→ worktree csv-b</span>', 350],
+      [M+'spawn_agent <span class="c-teal">gemini</span>  <span class="c-dim">→ worktree csv-c</span>', 600],
+      ['bars', 0],
+      [M+'review: claude + codex <span class="c-dim">→ merge sintético</span>', 800],
+      [M+'run_tests  <span class="c-ok">✓ 48 passed</span>', 700],
+      [M+'open_pr    <span class="c-ok">#47 aberto</span> <span class="c-dim">· aguardando você</span>', 300],
+      ['<span class="c-dim">$</span> <span class="caret"></span>', 0]
+    ];
+    var workers = [["claude",12,"c-ok","pronto  +142 −8"],["codex",12,"c-ok","pronto  +118 −5"],["gemini",7,"c-dim","timeout → kill_agent"]];
+    var timers = [];
+    function line(html){ var s=document.createElement("span"); s.className="l"; s.innerHTML=html; body.appendChild(s); requestAnimationFrame(function(){ requestAnimationFrame(function(){ s.classList.add("on"); }); }); return s; }
+    function wline(w,n,done){ return '  <span class="c-teal">'+w[0].padEnd(7)+'</span> <span class="'+(done?w[2]:"c-amb")+'">'+bar(n)+'</span>  '+(done?'<span class="'+w[2]+'">'+w[3]+'</span>':'<span class="c-dim">trabalhando…</span>'); }
+    function finalState(){
+      body.innerHTML="";
+      script.forEach(function(s){
+        if(s[0]==="bars"){ workers.forEach(function(w){ line(wline(w,w[1],true)); }); }
+        else line(s[0]);
+      });
+      Array.prototype.forEach.call(body.querySelectorAll(".l"),function(l){l.classList.add("on");});
+    }
+    function play(){
+      timers.forEach(clearTimeout); timers=[]; body.innerHTML="";
+      if(reduce){ finalState(); return; }
+      var t=200;
+      script.forEach(function(s){
+        if(s[0]==="bars"){
+          var els=[];
+          timers.push(setTimeout(function(){ workers.forEach(function(w){ els.push(line(wline(w,0,false))); }); }, t));
+          for(var k=1;k<=12;k++){ (function(k){
+            timers.push(setTimeout(function(){
+              workers.forEach(function(w,i){ var n=Math.min(k,w[1]); var done=(k===12); var speed=[1,.85,.6][i]; n=Math.min(w[1],Math.round(k*speed)); if(done)n=w[1]; els[i].innerHTML=wline(w,n,done); });
+            }, t+k*190));
+          })(k); }
+          t += 12*190+500;
+        } else {
+          timers.push(setTimeout(function(){ line(s[0]); }, t));
+          t += s[1];
+        }
+      });
+    }
+    var started=false;
+    if("IntersectionObserver" in window){
+      new IntersectionObserver(function(es,o){ if(es[0].isIntersecting && !started){ started=true; play(); o.disconnect(); } },{threshold:.35}).observe(body);
+    } else play();
+    document.getElementById("replay").addEventListener("click", play);
+  })();
+
+  // ---- clientes: escala o iframe pro tamanho do card ----
+  (function(){
+    var shots=document.querySelectorAll(".shot");
+    function fit(){ shots.forEach(function(s){ s.style.setProperty("--s", s.clientWidth/1280); }); }
+    fit(); window.addEventListener("resize", fit);
+  })();
+
   // ---- projetos (só repos do Rafatakitani). priv:true = repo privado, sem link ----
   var work = [
-    {n:"rege",               d:"Orquestrador multi-agente de IAs: um mestre comanda CLIs (claude/codex/gemini) isolados em git worktree + tmux, revisa e abre PR.", t:"Rust",        y:"2026", u:"https://github.com/Rafatakitani/rege"},
-    {n:"barbearia-pires",    d:"Site da Barbearia Pires, na Vila Monumento (SP).",                      t:"HTML · JS",    y:"2026", u:"https://rafatakitani.github.io/barbearia-pires-preview/"},
-    {n:"sogm-oficina",       d:"Site da oficina Grandes Mecânicos SÓGM.",                               t:"HTML · JS",    y:"2026", u:"https://rafatakitani.github.io/sogm-preview/"},
-    {n:"amg-serralheria",    d:"Landing page da AMG Serralheria.",                                      t:"Ruby · Rails", y:"2026", u:"https://rafatakitani.github.io/amg-preview/"},
     {n:"caribeburg",         d:"Roguelite de sobrevivência naval: navios piratas, hordas, armas que evoluem e chefes.", t:"Godot",       y:"2026", priv:true},
     {n:"estudobot",          d:"App de estudo pra alunos BR (9–18): gera resumos, flashcards e provas com IA a partir das anotações.", t:"Ruby · Rails", y:"2026", priv:true},
     {n:"objetos",            d:"Inventário dos objetos de casa: itens, locais, planta baixa e status de estoque.", t:"Ruby · Rails", y:"2026", priv:true},
@@ -290,9 +562,10 @@
   ];
 
   var ledger = document.getElementById("ledger");
-  work.forEach(function(w){
+  var rows = work.map(function(w){
     var el = document.createElement(w.priv ? "div" : "a");
     el.className = "row" + (w.priv ? " priv" : "");
+    el.dataset.t = w.t;
     if(!w.priv){ el.href = w.u; el.target = "_blank"; el.rel = "noopener"; }
     var lead = w.priv ? '<span class="lock" title="repositório privado">🔒</span>'
                       : '<span class="arrow">↗</span>';
@@ -302,7 +575,36 @@
       '<div class="tag">'+w.t+'</div>'+
       '<div class="yr">'+w.y+'</div>';
     ledger.appendChild(el);
+    return el;
   });
+
+  // ---- filtro ----
+  var btns = document.querySelectorAll(".filters button");
+  btns.forEach(function(b){
+    b.addEventListener("click", function(){
+      btns.forEach(function(x){ x.setAttribute("aria-pressed", x===b ? "true" : "false"); });
+      var f=b.dataset.f, i=0;
+      rows.forEach(function(r){
+        var show = !f || r.dataset.t.indexOf(f)!==-1;
+        r.classList.toggle("hide", !show);
+        r.classList.remove("enter");
+        if(show){ void r.offsetWidth; r.style.animationDelay=(i++*40)+"ms"; r.classList.add("enter"); }
+      });
+    });
+  });
+
+  // ---- linha do tempo: preenche conforme rola ----
+  (function(){
+    var tl=document.getElementById("tl"), items=tl.querySelectorAll(".tl-item"), fill=tl.querySelector(".fill");
+    function upd(){
+      var r=tl.getBoundingClientRect(), mid=window.innerHeight*.6;
+      var p=Math.max(0,Math.min(1,(mid-r.top)/r.height));
+      if(reduce) p=1;
+      fill.style.setProperty("--p",p);
+      items.forEach(function(it){ it.classList.toggle("lit", it.getBoundingClientRect().top+10 < (reduce?Infinity:mid)); });
+    }
+    upd(); window.addEventListener("scroll", upd, {passive:true}); window.addEventListener("resize", upd);
+  })();
 
   document.getElementById("yr").textContent = new Date().getFullYear();
 </script>
